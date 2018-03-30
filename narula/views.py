@@ -5,10 +5,15 @@ from rest_framework.views import APIView
 from .serializers import (LoginSerializer, RegistrationSerializer)
 from .renderers import UserJSONRenderer
 
+
 class LoginAPIView(APIView):
     permission_classes = (AllowAny,)
     renderer_classes = (UserJSONRenderer,)
     serializer_class = LoginSerializer
+
+    def get(self,):
+        return Response('Success', status=status.HTTP_200_OK)
+
 
     def post(self, request):
         user = request.data.get('user', {})

@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from .models import User
 from django.contrib.auth import authenticate
 
@@ -64,14 +63,6 @@ class LoginSerializer(serializers.Serializer):
             'token': user.token
         }
 
-class SendOTPSerializer(serializers.Serializer):
-    """
-    This Serializer is for sending OTP.
-    """
-    value = serializers.CharField()
-    prop = serializers.ChoiceField(choices=('email', 'mobile'))
-email = serializers.EmailField()
-
 class RegistrationSerializer(serializers.ModelSerializer):
     """Serializers registration requests and creates a new user."""
 
@@ -96,3 +87,4 @@ class RegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # Use the `create_user` method we wrote earlier to create a new user.
         return User.objects.create_user(**validated_data)
+

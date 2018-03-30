@@ -2,6 +2,13 @@ from rest_framework import serializers
 from .models import User
 from django.contrib.auth import authenticate
 
+class ForgotPasswordSerializers(serializers.ModelSerializer):
+    class Meta:
+        from .models import ForgotPassword
+
+        model = ForgotPassword
+        fields = '__all__'
+
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=255)

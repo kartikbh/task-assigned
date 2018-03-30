@@ -5,6 +5,46 @@ from rest_framework.views import APIView
 from .serializers import (LoginSerializer, RegistrationSerializer)
 from .renderers import UserJSONRenderer
 
+#send email function
+
+
+def send_email(email):
+    from django.core.mail import send_mail
+    send_mail(
+        'New otp',
+        'here is the messsage',
+        'kartik.bhatnagar@civilmachines.com',
+        [email],
+        fail_silently=False,
+    )
+#forgot email fucntion
+
+
+def forgot_password(email, otp):
+    from django.core.mail import send_mail
+    send_mail(
+        'New otp',
+        otp,
+        'kartik.bhatnagar@civilmachines.com',
+        [email],
+        fail_silently=False,
+        )
+# we will call forgot_email here so that user can get OTP
+
+
+class ForgotPasswordAPI(APIView):
+    permission_classes = (AllowAny,)
+    renderer_classes = (UserJSONRenderer,)
+
+    def get(self):
+        return Response('Success', status=status.HTTP_202_ACCEPTED)
+
+    def post(self, request):
+        from .serializers import ForgotPasswordSerializers
+        sdata = ForgotPasswordSerializers(data=request.data)
+        forgot_password('kartikbhatnagar2015@gmail.com', '200')
+        return Response(sdata.data, status=status.HTTP_201_CREATED)
+
 
 class LoginAPIView(APIView):
     permission_classes = (AllowAny,)
@@ -24,7 +64,7 @@ class LoginAPIView(APIView):
         # handles everything we need.
         serializer = self.serializer_class(data=user)
         serializer.is_valid(raise_exception=True)
-
+        send_email('niteshkhanduja19943@gmail.com')
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 

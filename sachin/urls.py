@@ -16,10 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from narula.views import LoginAPIView, RegistrationAPIView
+from narula.views import ForgotPasswordAPI
+
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+     url(r'^admin/', admin.site.urls),
     url(r'^users/login/', LoginAPIView.as_view()),
-    url(r'^users/', RegistrationAPIView.as_view())
+    url(r'^users/', RegistrationAPIView.as_view()),
+    url(r'^users/forgot', ForgotPasswordAPI.as_view())
 ]

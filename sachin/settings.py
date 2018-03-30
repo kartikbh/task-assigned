@@ -81,6 +81,15 @@ DATABASES = {
     }
 }
 
+#settings for email
+
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_HOST_USER = 'kartik.bhatnagar@civilmachines.com'
+EMAIL_HOST_PASSWORD = 'Kartik@123'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',

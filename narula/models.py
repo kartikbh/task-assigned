@@ -1,5 +1,5 @@
 import jwt
-
+from django.utils.translation import gettext_lazy as _
 from datetime import datetime, timedelta
 
 from django.conf import settings
@@ -7,6 +7,13 @@ from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin
 )
 from django.db import models
+
+
+class ForgotPassword(models.Model):
+    email = models.EmailField(_('Email ID'))
+
+    def __str__(self):
+        return self.email
 
 
 class UserManager(BaseUserManager):
@@ -46,6 +53,8 @@ class UserManager(BaseUserManager):
         user.save()
 
         return user
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     # Each `User` needs a human-readable unique identifier that we can use to
     # represent the `User` in the UI. We want to index this column in the
